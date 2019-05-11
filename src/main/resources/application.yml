@@ -1,0 +1,11 @@
+server:
+  port: 9201
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: db2excel-server
+
+sql2excel:
+  excel:
+    file-dir: ${work.home}/excel
