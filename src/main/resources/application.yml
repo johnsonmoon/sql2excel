@@ -11,3 +11,6 @@ sql2excel:
     file-dir: ${work.home}/excel
   task:
     timeout: 300000
+
+logging:
+  file: ${user.dir}/logs/sql2excel.log

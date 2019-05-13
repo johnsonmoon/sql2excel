@@ -1,0 +1,28 @@
+2019-05-13 18:49:55.674  INFO 46325 --- [main] c.j.sql2excel.Sql2excelApplication       : Starting Sql2excelApplication on JohnsondeMacBook-Pro.local with PID 46325 (/Users/johnson/johnson-workspace/sql2excel/target/classes started by johnson in /Users/johnson/johnson-workspace/sql2excel)
+2019-05-13 18:49:55.677  INFO 46325 --- [main] c.j.sql2excel.Sql2excelApplication       : No active profile set, falling back to default profiles: default
+2019-05-13 18:49:57.076  INFO 46325 --- [main] org.eclipse.jetty.util.log               : Logging initialized @2946ms to org.eclipse.jetty.util.log.Slf4jLog
+2019-05-13 18:49:57.208  INFO 46325 --- [main] o.s.b.w.e.j.JettyServletWebServerFactory : Server initialized with port: 9201
+2019-05-13 18:49:57.210  INFO 46325 --- [main] org.eclipse.jetty.server.Server          : jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 1.8.0_171-b11
+2019-05-13 18:49:57.249  INFO 46325 --- [main] o.e.j.s.h.ContextHandler.application     : Initializing Spring embedded WebApplicationContext
+2019-05-13 18:49:57.249  INFO 46325 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1509 ms
+2019-05-13 18:49:57.406  INFO 46325 --- [main] org.eclipse.jetty.server.session         : DefaultSessionIdManager workerName=node0
+2019-05-13 18:49:57.406  INFO 46325 --- [main] org.eclipse.jetty.server.session         : No SessionScavenger set, using defaults
+2019-05-13 18:49:57.407  INFO 46325 --- [main] org.eclipse.jetty.server.session         : node0 Scavenging every 600000ms
+2019-05-13 18:49:57.414  INFO 46325 --- [main] o.e.jetty.server.handler.ContextHandler  : Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@32b9bd12{application,/sql2excel,[file:///private/var/folders/rf/pmc0glh93k73yvztg2521hq40000gn/T/jetty-docbase.1238507319301847008.9201/, jar:file:/Users/johnson/opt/maven-repo/io/springfox/springfox-swagger-ui/2.9.2/springfox-swagger-ui-2.9.2.jar!/META-INF/resources],AVAILABLE}
+2019-05-13 18:49:57.415  INFO 46325 --- [main] org.eclipse.jetty.server.Server          : Started @3286ms
+2019-05-13 18:49:57.797  INFO 46325 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-05-13 18:49:57.939  INFO 46325 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-05-13 18:49:58.073  INFO 46325 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-05-13 18:49:58.102  INFO 46325 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-05-13 18:49:58.141  INFO 46325 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-05-13 18:49:58.420  INFO 46325 --- [main] o.e.j.s.h.ContextHandler.application     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-05-13 18:49:58.420  INFO 46325 --- [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-05-13 18:49:58.428  INFO 46325 --- [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-05-13 18:49:58.461  INFO 46325 --- [main] o.e.jetty.server.AbstractConnector       : Started ServerConnector@358ab600{HTTP/1.1,[http/1.1]}{0.0.0.0:9201}
+2019-05-13 18:49:58.466  INFO 46325 --- [main] o.s.b.web.embedded.jetty.JettyWebServer  : Jetty started on port(s) 9201 (http/1.1) with context path '/sql2excel'
+2019-05-13 18:49:58.468  INFO 46325 --- [main] c.j.sql2excel.Sql2excelApplication       : Started Sql2excelApplication in 3.453 seconds (JVM running for 4.34)
+2019-05-13 18:50:05.433  INFO 46325 --- [Thread-17] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-05-13 18:50:05.443  INFO 46325 --- [Thread-17] o.e.jetty.server.AbstractConnector       : Stopped ServerConnector@358ab600{HTTP/1.1,[http/1.1]}{0.0.0.0:9201}
+2019-05-13 18:50:05.444  INFO 46325 --- [Thread-17] org.eclipse.jetty.server.session         : node0 Stopped scavenging
+2019-05-13 18:50:05.446  INFO 46325 --- [Thread-17] o.e.j.s.h.ContextHandler.application     : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2019-05-13 18:50:05.447  INFO 46325 --- [Thread-17] o.e.jetty.server.handler.ContextHandler  : Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@32b9bd12{application,/sql2excel,[file:///private/var/folders/rf/pmc0glh93k73yvztg2521hq40000gn/T/jetty-docbase.1238507319301847008.9201/, jar:file:/Users/johnson/opt/maven-repo/io/springfox/springfox-swagger-ui/2.9.2/springfox-swagger-ui-2.9.2.jar!/META-INF/resources],UNAVAILABLE}
