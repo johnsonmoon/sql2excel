@@ -31,8 +31,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Java FTP server apis.")
-                .description("REST API docs for java-ftp-server.")
+                .title("Sql2Excel server apis.")
+                .description("REST API docs for sql2excel-server.")
                 .termsOfServiceUrl("")
                 .contact(new Contact("ftp", "", ""))
                 .version("1.0")
