@@ -10,10 +10,12 @@ import com.johnsonmoon.sql2excel.util.DBUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,9 +28,40 @@ public class TaskServiceImpl implements TaskService {
 
     @Value("${sql2excel.excel.file-dir}")
     private String fileDir;
+    @Value("${sql2excel.task.timeout}")
+    private Long taskTimeout = 300_000L;
     private int columnWidth = 4800;
-    private static Map<String, Task> taskCache = new HashMap<>();
+    private static Map<String, Task> taskCache = new ConcurrentHashMap<>();
     private static ExecutorService taskThreadPool = Executors.newFixedThreadPool(4);
+
+    @Scheduled(fixedDelay = 10_000)
+    public void taskTimeoutJudgeTask() {
+        taskCache.forEach((id, task) -> {
+            if (task.getTimeout()) {
+                return;
+            }
+            Long start = task.getCreateTime();
+            Long end = System.currentTimeMillis();
+            if (end - start >= taskTimeout) {
+                task.setTimeout(true);
+            }
+        });
+    }
+
+    @Scheduled(fixedDelay = 60_000)
+    public void taskTimeoutCleanTask() {
+        List<String> timeoutTaskIdList = new ArrayList<>();
+        taskCache.forEach((id, task) -> {
+            if (task.getTimeout()) {
+                timeoutTaskIdList.add(id);
+            }
+        });
+        timeoutTaskIdList.forEach(this::removeTaskCache);
+    }
+
+    private synchronized void removeTaskCache(String taskId) {
+        taskCache.remove(taskId);
+    }
 
     @Override
     public Task create(TaskCreateParam param) {

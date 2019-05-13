@@ -9,3 +9,5 @@ spring:
 sql2excel:
   excel:
     file-dir: ${work.home}/excel
+  task:
+    timeout: 300000
