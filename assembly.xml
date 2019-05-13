@@ -8,7 +8,7 @@
         <format>tar.gz</format>
     </formats>
     <includeBaseDirectory>true</includeBaseDirectory>
-    <baseDirectory>ftp-server</baseDirectory>
+    <baseDirectory>sql2excel-server</baseDirectory>
 
     <dependencySets>
         <dependencySet>

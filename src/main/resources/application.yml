@@ -1,7 +1,7 @@
 server:
   port: 9201
   servlet:
-    context-path: /
+    context-path: /sql2excel
 spring:
   application:
     name: db2excel-server
