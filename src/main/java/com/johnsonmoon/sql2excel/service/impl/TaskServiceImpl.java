@@ -131,24 +131,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task stop(String taskId) {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public Task pause(String taskId) {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public Task continueRun(String taskId) {
-        //TODO
-        return null;
-    }
-
-    @Override
     public Task status(String taskId) {
         return taskCache.get(taskId);
     }

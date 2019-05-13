@@ -16,30 +16,6 @@ public interface TaskService {
     Task create(TaskCreateParam param);
 
     /**
-     * Stop a task
-     *
-     * @param taskId {@link Task#taskId}
-     * @return {@link Task}
-     */
-    Task stop(String taskId);
-
-    /**
-     * Pause a task
-     *
-     * @param taskId {@link Task#taskId}
-     * @return {@link Task}
-     */
-    Task pause(String taskId);
-
-    /**
-     * Continue a task
-     *
-     * @param taskId {@link Task#taskId}
-     * @return {@link Task}
-     */
-    Task continueRun(String taskId);
-
-    /**
      * Get a task status
      *
      * @param taskId {@link Task#taskId}

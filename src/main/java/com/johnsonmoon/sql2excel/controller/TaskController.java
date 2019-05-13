@@ -61,33 +61,6 @@ public class TaskController {
         return taskService.create(param);
     }
 
-    @GetMapping("/task/stop")
-    //@ApiOperation("Stop a task.")
-    public Task stopTask(@RequestParam("taskId") String taskId) {
-        if (taskId == null || taskId.isEmpty()) {
-            throw new WebException("Param error.");
-        }
-        return taskService.stop(taskId);
-    }
-
-    @GetMapping("/task/pause")
-    //@ApiOperation("Pause a task.")
-    public Task pauseTask(@RequestParam("taskId") String taskId) {
-        if (taskId == null || taskId.isEmpty()) {
-            throw new WebException("Param error.");
-        }
-        return taskService.pause(taskId);
-    }
-
-    @GetMapping("/task/continue")
-    //@ApiOperation("Continue a task.")
-    public Task continueTask(@RequestParam("taskId") String taskId) {
-        if (taskId == null || taskId.isEmpty()) {
-            throw new WebException("Param error.");
-        }
-        return taskService.continueRun(taskId);
-    }
-
     @GetMapping("/task/status")
     @ApiOperation("Status of a task.")
     public Task status(@RequestParam("taskId") String taskId) {
