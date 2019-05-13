@@ -88,31 +88,37 @@ public class TaskServiceImpl implements TaskService {
                         DBUtils.createConnection(param.getClassName(), param.getUrl(), param.getUserName(), param.getPassword()),
                         param.getSql(),
                         (count, index, rowDataMap) -> {
-                            task.setCount(count);
-                            task.setIndex(index);
-                            int row = Integer.parseInt(String.valueOf(index));
-                            if (index == 0) {//header
-                                List<CellData> header = new ArrayList<>();
-                                int column = 0;
-                                for (Map.Entry<String, Object> entry : rowDataMap.entrySet()) {
-                                    columns.add(entry.getKey());
-                                    CellData cellData = new CellData(row, column, entry.getKey(), CellStyle.CELL_STYLE_TYPE_COLUMN_HEADER);
+                            try {
+                                task.setCount(count);
+                                task.setIndex(index);
+                                int row = Integer.parseInt(String.valueOf(index));
+                                logger.info(String.format("TaskId: %s, Count: %s, Current Index: %s, row data: %s", taskId, count, index, rowDataMap));
+                                if (index == 0) {//header
+                                    List<CellData> header = new ArrayList<>();
+                                    int column = 0;
+                                    for (Map.Entry<String, Object> entry : rowDataMap.entrySet()) {
+                                        columns.add(entry.getKey());
+                                        CellData cellData = new CellData(row, column, entry.getKey(), CellStyle.CELL_STYLE_TYPE_COLUMN_HEADER);
+                                        freeWriter.setExcelColumnWidth(0, column, columnWidth);
+                                        header.add(cellData);
+                                        column++;
+                                    }
+                                    if (!freeWriter.createExcel(header, 0, "DATA")) {
+                                        return false;
+                                    }
+                                }
+                                //data
+                                List<CellData> data = new ArrayList<>();
+                                for (int column = 0; column < columns.size(); column++) {
+                                    CellData cellData = new CellData(row + 1, column, rowDataMap.get(columns.get(column)), CellStyle.CELL_STYLE_TYPE_COLUMN_HEADER);
+                                    data.add(cellData);
                                     freeWriter.setExcelColumnWidth(0, column, columnWidth);
-                                    header.add(cellData);
-                                    column++;
                                 }
-                                if (!freeWriter.createExcel(header, 0, "DATA")) {
-                                    return false;
-                                }
+                                return freeWriter.writeExcelData(data, 0);
+                            } catch (Exception e) {
+                                logger.warn(e.getMessage(), e);
+                                return false;
                             }
-                            //data
-                            List<CellData> data = new ArrayList<>();
-                            for (int column = 0; column < columns.size(); column++) {
-                                CellData cellData = new CellData(row + 1, column, rowDataMap.get(columns.get(column)), CellStyle.CELL_STYLE_TYPE_COLUMN_HEADER);
-                                data.add(cellData);
-                                freeWriter.setExcelColumnWidth(0, column, columnWidth);
-                            }
-                            return freeWriter.writeExcelData(data, 0);
                         }
                 );
                 freeWriter.flush();
