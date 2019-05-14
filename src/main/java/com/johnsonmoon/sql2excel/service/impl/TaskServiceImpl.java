@@ -79,10 +79,10 @@ public class TaskServiceImpl implements TaskService {
         taskCache.put(taskId, task);
 
         taskThreadPool.submit(() -> {
-            String errorMessage = "Succeeded.";
-            final FreeWriter freeWriter;
+            final Map<String, Object> contextDataMap = new HashMap<>();
+            contextDataMap.put("errorMessage", "Succeeded.");
+            final FreeWriter freeWriter = new FreeWriter(filePathName);
             try {
-                freeWriter = new FreeWriter(filePathName);
                 List<String> columns = new ArrayList<>();
                 DBUtils.query(
                         DBUtils.createConnection(param.getClassName(), param.getUrl(), param.getUserName(), param.getPassword()),
@@ -90,9 +90,9 @@ public class TaskServiceImpl implements TaskService {
                         (count, index, rowDataMap) -> {
                             try {
                                 task.setCount(count);
-                                task.setIndex(index);
+                                task.setIndex(index + 1);
                                 int row = Integer.parseInt(String.valueOf(index));
-                                logger.info(String.format("TaskId: %s, Count: %s, Current Index: %s, row data: %s", taskId, count, index, rowDataMap));
+                                logger.info(String.format("TaskId: %s, Count: %s, Current Index: %s, row data: %s", taskId, count, index + 1, rowDataMap));
                                 if (index == 0) {//header
                                     List<CellData> header = new ArrayList<>();
                                     int column = 0;
@@ -117,19 +117,20 @@ public class TaskServiceImpl implements TaskService {
                                 return freeWriter.writeExcelData(data, 0);
                             } catch (Exception e) {
                                 logger.warn(e.getMessage(), e);
+                                contextDataMap.put("errorMessage", e.getMessage());
                                 return false;
                             }
                         }
                 );
                 freeWriter.flush();
-                freeWriter.close();
             } catch (Exception e) {
                 logger.warn(e.getMessage(), e);
-                errorMessage = e.getMessage();
+                contextDataMap.put("errorMessage", e.getMessage());
                 task.setInterrupted(true);
             } finally {
                 task.setFinished(true);
-                task.setErrorMessage(errorMessage);
+                task.setErrorMessage(String.valueOf(contextDataMap.get("errorMessage")));
+                freeWriter.close();
             }
         });
 

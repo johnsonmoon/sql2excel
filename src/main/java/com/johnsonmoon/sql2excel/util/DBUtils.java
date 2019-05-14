@@ -28,13 +28,14 @@ public class DBUtils {
             Class.forName(driverClassName);
         } catch (Throwable e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         }
         try {
             return DriverManager.getConnection(url, username, password);
         } catch (Throwable e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         }
-        return null;
     }
 
     /**
@@ -79,6 +80,7 @@ public class DBUtils {
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         } finally {
             close(statement, resultSet);
         }
@@ -130,6 +132,7 @@ public class DBUtils {
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         } finally {
             close(statement, resultSet);
         }
@@ -161,6 +164,7 @@ public class DBUtils {
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         } finally {
             close(statement, resultSetCount);
         }
@@ -204,10 +208,10 @@ public class DBUtils {
             return statement.executeUpdate(sql);
         } catch (SQLException e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         } finally {
             close(statement);
         }
-        return 0;
     }
 
     /**
@@ -230,6 +234,7 @@ public class DBUtils {
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage(), e);
+            throw new DBException(e.getMessage(), e);
         }
     }
 }
